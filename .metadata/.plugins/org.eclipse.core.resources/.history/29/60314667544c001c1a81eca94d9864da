@@ -1,0 +1,16 @@
+package com.example.demo.controllers;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController //allows us to send JSON data back, or other forms of data medium
+@RequestMapping(path = "/car")
+public class CarController {
+	@GetMapping
+	public String get(){
+		String car = "Mazda";
+		return car;
+	}
+}

@@ -1,0 +1,17 @@
+package com.qa.day11;
+
+import java.util.Optional;
+
+public class Runner {
+public static void main(String[] args) {
+	String item;
+	
+	if (Math.random()>=0.5) {
+		item="Hello";
+		
+	}else {
+		item=null;
+	}
+	Optional<String> itemString = Optional.ofNullable(item);
+}
+}

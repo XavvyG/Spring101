@@ -1,0 +1,55 @@
+package com.example.demo.controllers;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController // allows us to send JSON data back, or other forms of data medium, indicates
+				// this is a component/bean to the AppContext
+@RequestMapping(path = "/car")
+public class CarController {
+	
+	List<String> cars = List.of("Mazda", "Toyota", "Lexus", "Nissan", "BMW", "Mercedes Benz");
+	
+	// localhost:8080/car
+	// 127.0.0.1:8080/car
+	@GetMapping
+	public ResponseEntity<List<String>> get() {
+		String car = "Nissan Almera";
+		ResponseEntity<List<String>> response = new ResponseEntity<List<String>>(cars, HttpStatus.OK);
+		return response;
+	}
+	
+	//Path variables are specified in the url
+	//i.e. localhost:8080/car/3 where 3 is the path variable
+	
+	@GetMapping("/{id}") //the variable is specified in brackets
+	public ResponseEntity<Integer> getsPathVariable(@PathVariable("id") Integer id){
+		return ResponseEntity.of(Optional.ofNullable(id));
+	}
+	
+	//Query parameters are also specified in the URL, as KEY=VALUE pairs
+	// -query strings begin with a question mark
+	// i.e. localhost:8080/car?id=32
+	
+	@GetMapping("/alt")
+	public ResponseEntity<Integer> getQueryParameter(@RequestParam("id") Integer id){
+		return ResponseEntity.of(Optional.ofNullable(id));
+	}
+	
+    @GetMapping("/{id}")
+    public String getCar() {
+		ResponseEntity<List<String>> response = new ResponseEntity<List<String>>(cars, HttpStatus.OK);
+		List<String> car = response.getBody();
+		String selectedCar = car.get(0);
+		return selectedCar;
+	}
+}
