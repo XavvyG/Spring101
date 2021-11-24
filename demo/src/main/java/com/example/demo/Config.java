@@ -14,8 +14,8 @@ public class Config {
 	//Beans are singleton by default, only one instance is ever created
 
 	@Bean
-	public String iAmABean() {
-		return "Hello Bean";
+	public String init() {
+		return "Success";
 	}
 	
 	@Bean

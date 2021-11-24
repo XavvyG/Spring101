@@ -1,0 +1,66 @@
+package com.example.demo.data.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.data.model.Car;
+import com.example.demo.data.repository.CarRepo;
+
+@Service
+public class CarService {
+	
+	private CarRepo repo;
+	private List<Car> carList = new ArrayList<>();
+	
+	public CarService (CarRepo repo) {
+		this.repo = repo;
+	}
+	
+	//read all method
+	public List<Car> getAllCars(){
+		// SELECT * FROM car;
+		return this.repo.findAll();
+	}
+	
+	//update method
+	public Car updateCar(Car car, Integer id) {
+		//find the car to update
+		Optional<Car> carToFind = this.repo.findById(id);
+		Car carToUpdate = carToFind.get();
+		
+		//set that car with new values
+		carToUpdate.setColour(car.getColour());
+		carToUpdate.setEngineSize(car.getEngineSize());
+		carToUpdate.setMake(car.getMake());
+		carToUpdate.setMileage(car.getMileage());
+		carToUpdate.setModel(car.getModel());
+		carToUpdate.setYearManufactured(car.getYearManufactured());
+		//save updated car
+		return this.repo.save(carToUpdate);
+	}
+	
+	//add method
+	public Car addCar(Car car) {
+//        // Add new Car
+//		Car car1 = new Car();
+//		car1.setColour("White");
+//		car1.setEngineSize(0);
+//		car1.setMake(null);
+//		car1.setMileage(0);
+//		car1.setModel(null);
+//		car1.setYearManufactured(0);
+        this.carList.add(car);
+        // Return last added Car from List
+        return this.carList.get(this.carList.size() - 1);
+    }
+	
+	//delete method
+    public Car removeCar(int id) {
+        // Remove Person and return it
+        return this.carList.remove(id);
+    }
+	
+}

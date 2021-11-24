@@ -1,0 +1,8 @@
+package com.example.demo.exceptions;
+
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(code=HttpsStatus.NOT_FOUND, reason = "No car exists with the provided ID")
+public class CarNotFoundException extends RunTimeException {
+	
+}

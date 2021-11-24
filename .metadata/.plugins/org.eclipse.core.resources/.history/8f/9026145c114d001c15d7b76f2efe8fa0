@@ -1,0 +1,23 @@
+package com.example.demo.data.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.data.model.Car;
+import com.example.demo.data.repository.CarRepo;
+
+@Service
+public class CarService {
+	
+	private CarRepo repo;
+	
+	public CarService (CarRepo repo) {
+		this.repo = repo;
+	}
+	
+	public List<Car> getAllCars(){
+		// SELECT * FROM car;
+		return this.repo.findAll();
+	}
+}

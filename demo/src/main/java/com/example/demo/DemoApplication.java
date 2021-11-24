@@ -13,7 +13,7 @@ public class DemoApplication {
 		
 		//Method name is the name of the Bean method
 		// - "Hello Bean" is the actual Bean retrieved
-		String s = ac.getBean("iAmABean").toString();
+		String s = ac.getBean("init").toString();
 		System.out.println(s);
 		
 		

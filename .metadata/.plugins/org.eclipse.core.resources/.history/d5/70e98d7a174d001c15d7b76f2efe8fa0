@@ -1,0 +1,43 @@
+package com.example.demo.data.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.data.model.Car;
+import com.example.demo.data.repository.CarRepo;
+
+@Service
+public class CarService {
+	
+	private CarRepo repo;
+	
+	public CarService (CarRepo repo) {
+		this.repo = repo;
+	}
+	
+	public List<Car> getAllCars(){
+		// SELECT * FROM car;
+		return this.repo.findAll();
+	}
+	
+	public Car updateCar(Car car, Integer id) {
+		//find the car to update
+		Optional<Car> carToFind = this.repo.findById(id);
+		Car carToUpdate = carToFind.get();
+		
+		//set that car with new values
+		carToUpdate.setColour(car.getColour());
+		carToUpdate.setEngineSize(car.getEngineSize());
+		carToUpdate.setMake(car.getMake());
+		carToUpdate.setMileage(car.getMileage());
+		carToUpdate.setModel(car.getModel());
+		carToUpdate.setYearManufactured(car.getYearManufactured());
+		//save updated car
+		
+		
+		return null;
+	}
+	
+}
